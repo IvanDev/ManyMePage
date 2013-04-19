@@ -11,10 +11,10 @@ body {
 }
 
 #backgroundOverlay {
-    /* width: 100%; */
+    width: 100%; 
     height: 100%;
     left: 0;
-    top: 0;
+    bottom: 0;
     padding: 0px;
     margin: 0px;
     position: absolute;
