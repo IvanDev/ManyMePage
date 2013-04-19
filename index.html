@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+	<head>
+		<title>ManyMe - an app for taking pictures of many you</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
+		<meta name="description" content="ManyMe - an app for taking pictures of many you">
+		<meta name="author" content="i1labs">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-itunes-app" content="app-id=597394773">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+		<link href="css/layout.css" rel="stylesheet" type="text/css" media="screen" />
+	</head>
+	
+	<body>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=105533629617330";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		<header id="page_content" >
+			<section class="centered_content">
+				<hgroup class="left_content">
+					<img src="./images/logo.png" width="242" id="logo">
+					
+					<div class="oneLiner" id="oneLiner">The app for taking pictures of many you!</div>
+
+					<a class='youtube' href="http://www.youtube.com/embed/tlf-XuwW-vg?autoplay=1&fs=1" id="videoBtn">
+						<div style="width: 200px; height: 117px; display: block; position: relative;">
+							<img src="./images/video_thumbnail.jpg" width="200" id="videoBtnImg" class="videoBtnImg"/>
+							<div class="playButton">&#9654;</div>
+						</div>
+					</a>
+					<br>
+
+					<a class='appstore' href="#http://goo.gl/15N0A" id="appStoreBtn" title="Availabe on the App Store">
+						<span class="getAppLabel" id="getAppLabel">Get ManyMe app for free!</span>
+						<img src="./images/appstore.png" width="135" id="appStoreBtnImg" alt="Availabe on the App Store"/>
+					</a> 
+					
+					<div class="social_box">
+						<a href="https://twitter.com/ManyMeApp" class="twitter-follow-button" data-show-count="false">Follow @ManyMeApp</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+						<br>
+						<div class="fb-follow" data-href="https://www.facebook.com/manymeapp" data-layout="button_count" data-show-faces="false" data-width="100"></div>
+					</div>
+				</hgroup>
+			</section>
+			
+		</header>
+	
+
+	   
+		<footer id="footer">
+			<section class="centered_content">
+				<div class="copyright">&copy; 2012-13, Ivan, <a href="http://ManyMeApp.com">ManyMeApp.com</a></div>
+			</section>
+		</footer>
+
+
+	
+		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.colorbox-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.localisation.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/locale.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/i1Noise.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type=text/javascript charset=utf-8>  
+
+			function onPageReady()
+			{
+				createNewCanvas();
+			}
+
+			function onResize() {
+				if (window['timerObj'] != undefined)
+				{
+					window.clearInterval(timerObj);
+					$( "#grainCanvas" ).fadeOut(50);
+				}
+				if (window['resizeTimeout'] != undefined) window.clearTimeout(resizeTimeout);
+    			resizeTimeout = window.setTimeout(createNewCanvas, 300);
+			}
+
+			function createNewCanvas()
+			{
+				if(navigator.userAgent.indexOf('Opera')!=-1 || navigator.userAgent.indexOf('MSIE')!=-1) return;
+
+
+				$( "#grainCanvas" ).fadeOut(50).remove();
+				if (window['noiseObj'] != undefined)
+				{
+					delete noiseObj;
+				}
+				i1Noise.createCanvas(window.innerWidth / window.innerHeight, $('body'), 'grainCanvas', 'grainCanvas');
+				
+				noiseObj = new i1Noise('grainCanvas');
+				$( "#grainCanvas" ).delay(100).fadeIn(500);
+
+				timerObj = window.setInterval(onTimer, 1.0/24.0 * 1000);
+			}
+			
+			function onTimer() { 
+				noiseObj.doStep();
+			}
+
+			window.addEventListener("resize", onResize, false);
+			$(document).ready(function(){
+				$.extend($.colorbox.settings, {close: "&#x2716"});
+				$(".youtube").colorbox({iframe:true, innerWidth:800, innerHeight:450});
+				
+				$.localise("js/locale");
+				$('#oneLiner').text(oneLinerText);
+				$('#appStoreBtn').attr('title', appStoreAltText);
+				$('#appStoreBtnImg').attr('alt', appStoreAltText);
+				$('#appStoreBtnImg').attr('src', "./images/"+appStoreImgFileName);
+				$('#videoBtn').attr('title', videoAltText);
+				$('#videoBtnImg').attr('alt', videoAltText);
+				$('#getAppLabel').html(getAppLabelText);
+				document.title = pageTitleText;
+
+				$('body').prepend('<div id="backgroundOverlay"></div>');
+				window.setTimeout(onPageReady, 300);
+			});
+
+		</script>
+
+	</body>
+
+</html>
