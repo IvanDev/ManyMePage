@@ -27,15 +27,12 @@
 		<header id="page_content" >
 			<section class="centered_content">
 				<hgroup class="left_content">
-					<img src="./images/logo.png" width="242" id="logo">
+					<div class="logo" id="logo"></div>
 					
 					<div class="oneLiner" id="oneLiner">The app for taking pictures of many you!</div>
 
-					<a class='youtube' href="http://www.youtube.com/embed/tlf-XuwW-vg?autoplay=1&fs=1&autoplay=1&iv_load_policy=3&modestbranding=1&rel=0&hd=1&vq=hd720" id="videoBtn">
-						<div class="videoBox">
-							<img src="./images/video_thumbnail.jpg" width="200" id="videoBtnImg" class="videoBtnImg"/>
+					<a class='videoBox' href="http://www.youtube.com/embed/tlf-XuwW-vg?autoplay=1&fs=1&autoplay=1&iv_load_policy=3&modestbranding=1&rel=0&hd=1&vq=hd720" id="videoBtn">
 							<div class="playButton">&#9654;</div>
-						</div>
 					</a>
 					<br>
 
@@ -70,9 +67,10 @@
 
 			function resizeColorBox()
 			{
-				var ratio = window.innerWidth / window.innerHeight;
-				var windowHeight=0.8 * window.innerHeight;
-				$(".youtube").colorbox({iframe:true, innerWidth:windowHeight*(16.0/9.0)|0, innerHeight:windowHeight|0});
+				const videoRatio=(16.0/9.0);
+				var videoWidth=Math.min( (0.8 * window.innerHeight)*videoRatio, 0.95*window.innerWidth);
+				var videoHeight=videoWidth / videoRatio;
+				$(".videoBox").colorbox({iframe:true, innerWidth:videoWidth|0, innerHeight:videoHeight|0});
 			}
 
 			function onPageReady()
@@ -84,6 +82,17 @@
 			{
 				createNewCanvas();
 				resizeColorBox();
+
+				var win_w = window.innerWidth;
+			    if (document.getElementById("backgroundOverlay")!=undefined)
+			    {
+			    	var currentRes = ($("#backgroundOverlay").css('background-image').match("url.*_([0-9]+)") ? RegExp.$1 : null) | 0;
+			    	var bestRes=getBestBGImageSize(win_w);
+				    if (currentRes && currentRes < bestRes) {
+						changeCssValue('#backgroundOverlay', 'background-image', "url('../images/background_"+bestRes+".jpg')");
+						console.log('Chosen background: ' + bestRes);
+				    }
+			    }
 			}
 
 			function onResizeEvent() {
@@ -146,7 +155,6 @@
 				$(document).ready(function(){
 					$.extend($.colorbox.settings, {close: "&#x2716"});
 					resizeColorBox();
-					//$(".youtube").colorbox({iframe:true, innerWidth:"60%", innerHeight:"60%", maxWidth: 800, maxHeight: 450});
 
 					$.localise("js/locale");
 					$('#oneLiner').text(oneLinerText);
@@ -172,8 +180,32 @@
 				});
 		    }
 
+			function getBestBGImageSize(windowWidth)
+			{
+				var available = [1024, 1280, 1440, 1680, 1920];
+				var bestRes = available[available.length - 1];
+				for (var i=0; i<available.length; i++) {
+					if (available[i] >= windowWidth) {
+						bestRes = available[i];
+						break;
+					}
+				}
+				return bestRes;
+			}
+			function changeCssValue(selector, property, value) {
+				for (var i=0; i<document.styleSheets.length;i++) {
+						try { 
+							document.styleSheets[i].insertRule(selector+ ' {'+property+':'+value+'}', document.styleSheets[i].cssRules.length);
+						} catch(err) {
+							try { document.styleSheets[i].addRule(selector, property+':'+value);} catch(err) {alert('cant change'+err)}
+						}//IE
+					}
+			}
+
 		    function loadBackground()
 		    {
+				changeCssValue('#backgroundOverlay', 'background-image', "url('../images/background_"+getBestBGImageSize(window.innerWidth)+".jpg')");
+
 		    	function createDocumentFragment(htmlStr) {
 				    var frag = document.createDocumentFragment(),
 				        temp = document.createElement('div');

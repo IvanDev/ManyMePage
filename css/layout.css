@@ -17,7 +17,11 @@ body {
     padding: 0px;
     margin: 0px;
     position: absolute;
-	background: #cccdc1 url('../images/background.jpg') no-repeat left bottom; 
+	/*background: #cccdc1 url('../images/background.jpg') no-repeat left bottom; */
+	background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+	background-position: left bottom;
+	background-repeat: no-repeat;
+
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
 	-o-background-size: cover;
@@ -109,6 +113,17 @@ a:hover {
 	top: 0%;
 }
 
+.logo {
+	width: 242px;
+	height: 115px;
+	
+	position: relative;
+	
+	background-image: url('../images/logo.png');
+	background-position: left bottom;
+	background-repeat: no-repeat;
+}
+
 #page_content .oneLiner {
 	font-family: Myriad Pro, Arial, Helvetica, sans-serif;
 	display: block;
@@ -146,20 +161,16 @@ a:hover {
 	height: 117px;
 	display: block;
 	position: relative;
-}
-
-#page_content .youtube {
-	display: block;
 	margin-top: 20px;
-	display: inline-block;
-}
 
-#page_content .videoBtnImg {
 	border: 3px solid rgba(255,255,255,0.1);
 	 -moz-border-radius: 5%;
     -webkit-border-radius: 5%;
     border-radius: 5%;
-    display: inline-block;
+
+	background-image: url('../images/video_thumbnail.jpg');
+	background-position: left bottom;
+	background-repeat: no-repeat;
 }
 
 #page_content .appstore {
@@ -168,11 +179,11 @@ a:hover {
 	display: inline-block;
 }
 
-#page_content .social_box {
+/*#page_content .social_box {
 	display: block;
 	margin-top: 60px;
 	text-align: left;
-}
+}*/
 
 .playButton {
     position: absolute;
@@ -239,6 +250,18 @@ a:hover {
 	user-select: text;
 }
 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    .videoBox {
+    	background-image: url('../images/video_thumbnail@2x.jpg');
+    	background-size: 200px 117px;
+    }
+
+    .logo {
+    	background-image: url('../images/logo@2x.png');
+    	background-size: 242px 115px;
+    }
+}
+
 @media screen and (max-device-width: 480px) and (orientation: portrait) {
 	
 
@@ -252,16 +275,12 @@ a:hover {
 		margin-top: 10px;
 	}
 
-	#page_content .youtube {
+	.videoBox {
 		margin-top: 20px;
-	}
-	
-	#page_content .videoBtnImg {
-		
 	}
 
 	#page_content .appstore {
-		margin-top: 20px;
+		margin-top: -20px;
 	}
 
 	#footer {
@@ -269,12 +288,12 @@ a:hover {
 		position: absolute;
 		bottom: -120;
 	}
-
+	/*
 	#page_content .social_box {
 		display: block;
 		margin-top: 20px;
 		text-align: left;
-	}
+	}*/
 
 	#backgroundOverlay {
 		width: 320px;
@@ -302,24 +321,15 @@ a:hover {
 		-webkit-text-size-adjust:none;
 	}
 
-	#page_content .youtube {
-		margin-top: -60;
-		margin-left: -245;
-	}
-
-	#page_content .videoBtnImg {
-		width: 120;
-	}
-
 	#page_content .appstore {
 		margin-top: 10px;
 	}
 
-	#page_content .social_box {
+	/*#page_content .social_box {
 		display: block;
 		margin-top: 20px;
 		text-align: center;
-	}
+	}*/
 
 	#footer {
 		-webkit-text-size-adjust:none;
@@ -336,10 +346,16 @@ a:hover {
 	}
 
 	.videoBox {
+		margin-top: -65;
+		margin-left: 15;
 		width: 120px;
-		height: 70px;
+		height: 67px;
+		background-size: 120px 67px;
 	}
 
+	.logo {
+		margin: 0 auto;
+	}
 }
 
 
