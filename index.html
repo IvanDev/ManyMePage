@@ -70,6 +70,10 @@
 
 			function onPageReady()
 			{
+		    	var ratio = window.innerWidth / window.innerHeight;
+				var windowWidth=0.8 * window.innerWidth;
+				$(".youtube").colorbox({iframe:true, innerWidth:windowWidth|0, innerHeight:windowWidth/ratio|0});
+
 				createNewCanvas();
 			}
 
@@ -97,11 +101,12 @@
 				noiseObj = new i1Noise('grainCanvas');
 				$( "#grainCanvas" ).delay(100).fadeIn(500);
 
-				timerObj = window.setInterval(onTimer, 1.0/24.0 * 1000);
+				timerObj = window.setInterval(onTimer, (1.0/24.0 * 1000)|0);
 			}
 			
 			function onTimer() { 
-				noiseObj.doStep();
+				if (window.grainAnimationEnabled)
+					noiseObj.doStep();
 			}
  
 			function loadScript(url, useAsync, callback) {
@@ -131,7 +136,13 @@
 
 				$(document).ready(function(){
 					$.extend($.colorbox.settings, {close: "&#x2716"});
-					$(".youtube").colorbox({iframe:true, innerWidth:800, innerHeight:450});
+
+					//$(".youtube").colorbox({iframe:true, innerWidth:"60%", innerHeight:"60%", maxWidth: 800, maxHeight: 450});
+
+					var ratio = window.innerWidth / window.innerHeight;
+					var windowWidth=0.8 * window.innerWidth;
+					$(".youtube").colorbox({iframe:true, innerWidth:windowWidth|0, innerHeight:windowWidth/ratio|0});
+
 					
 					$.localise("js/locale");
 					$('#oneLiner').text(oneLinerText);
@@ -143,11 +154,21 @@
 					$('#getAppLabel').html(getAppLabelText);
 					document.title = pageTitleText;
 
+					$(document).bind('cbox_open', function(){ 
+						window.grainAnimationEnabled=false;
+						$( "#grainCanvas" ).fadeOut(100);
+					 });
+
+					$(document).bind('cbox_closed', function(){ 
+						window.grainAnimationEnabled=true;
+						$( "#grainCanvas" ).delay(100).fadeIn(500);
+					 });
+					window.grainAnimationEnabled=true;
 					window.setTimeout(onPageReady, 300);
 				});
 		    }
 
-		    function onPageLoad()
+		    function loadBackground()
 		    {
 		    	function createDocumentFragment(htmlStr) {
 				    var frag = document.createDocumentFragment(),
@@ -159,12 +180,16 @@
 				    return frag;
 				}
 				document.body.insertBefore(createDocumentFragment('<div id="backgroundOverlay"></div>'), document.body.childNodes[0]);
+		    }
 
+		    function onPageLoad()
+		    {
+		    	loadBackground();
 		    	var scriptSrc = ["http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", false,
-		    					 "http://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.3/jquery.colorbox-min.js", false,
 		    					 "js/jquery.localisation.min.js", false,
 		    					 "js/locale.js", false,
-		    					 "js/i1Noise.js", true];
+		    					 "js/i1Noise.js", true,
+		    					 "js/jquery.colorbox-min.js", false];
 		    	
 		    	window.scriptsToLoad=scriptSrc.length / 2;
 		    	window.scriptsLoaded=0;
