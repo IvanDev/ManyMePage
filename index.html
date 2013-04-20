@@ -188,6 +188,10 @@
 
 		    function onPageLoad()
 		    {
+		    	if (navigator.userAgent.indexOf('Android')!=-1)
+		    	{
+		    		document.getElementById("page_content").className = "page_content_android";
+		    	}
 		    	loadBackground();
 		    	var scriptSrc = ["http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", false,
 		    					 "js/jquery.localisation.min.js", false,
