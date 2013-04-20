@@ -87,7 +87,6 @@
 			{
 				if(navigator.userAgent.indexOf('Opera')!=-1 || navigator.userAgent.indexOf('MSIE')!=-1) return;
 
-
 				$( "#grainCanvas" ).fadeOut(50).remove();
 				if (window['noiseObj'] != undefined)
 				{
@@ -109,14 +108,14 @@
 		        var script = document.createElement("script")
 		        script.type = "text/javascript";
 				script.async = useAsync;
-		        if (script.readyState) { //IE
+		        if (script.readyState) {
 		            script.onreadystatechange = function () {
 		                if (script.readyState == "loaded" || script.readyState == "complete") {
 		                    script.onreadystatechange = null;
 		                    callback();
 		                }
 		            };
-		        } else { //Others
+		        } else { 
 		            script.onload = function () {
 		                callback();
 		            };
@@ -144,15 +143,25 @@
 					$('#getAppLabel').html(getAppLabelText);
 					document.title = pageTitleText;
 
-					$('body').prepend('<div id="backgroundOverlay"></div>');
 					window.setTimeout(onPageReady, 300);
 				});
 		    }
 
 		    function onPageLoad()
 		    {
+		    	function createDocumentFragment(htmlStr) {
+				    var frag = document.createDocumentFragment(),
+				        temp = document.createElement('div');
+				    temp.innerHTML = htmlStr;
+				    while (temp.firstChild) {
+				        frag.appendChild(temp.firstChild);
+				    }
+				    return frag;
+				}
+				document.body.insertBefore(createDocumentFragment('<div id="backgroundOverlay"></div>'), document.body.childNodes[0]);
+
 		    	var scriptSrc = ["http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", false,
-		    					 "js/jquery.colorbox-min.js", false,
+		    					 "http://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.3/jquery.colorbox-min.js", false,
 		    					 "js/jquery.localisation.min.js", false,
 		    					 "js/locale.js", false,
 		    					 "js/i1Noise.js", true];
