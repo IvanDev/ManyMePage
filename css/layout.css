@@ -159,8 +159,9 @@ a:hover {
 
 .videoBox {
 	width: 200px;
-	height: 117px;
+	height: 112px;
 	display: block;
+	padding: 0;
 	position: relative;
 	margin-top: 20px;
 
@@ -254,7 +255,7 @@ a:hover {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
     .videoBox {
     	background-image: url('../images/video_thumbnail@2x.jpg');
-    	background-size: 200px 117px;
+    	background-size: 200px 112px;
     }
 
     .logo {
