@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">      
 		<meta name="description" content="ManyMe - an app for taking pictures of many you">
 		<meta name="keywords" content="ManyMe, ManyMeApp, iPhone camera app, app, camera app, collage, clone, twin, montage, composite, photomontage, twitter, fotos, cam, image, photo, photography, awesome, best, camera, picture, pic, effect">
 		<meta name="author" content="i1labs">
@@ -12,7 +12,7 @@
 		<title>ManyMe - an app for taking pictures of many you</title>
 		<link href="css/layout.css" rel="stylesheet" type="text/css" media="screen" />
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-    	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 	</head>
 	
 	<body>
@@ -58,7 +58,7 @@
 		</header>
 	
 
-	   
+	
 		<footer id="footer">
 			<section class="centered_content">
 				<div class="copyright">&copy; 2012-13, Ivan, <a href="http://ManyMeApp.com">ManyMeApp.com</a></div>
@@ -70,7 +70,7 @@
 
 			function resizeColorBox()
 			{
-				const videoRatio=(16.0/9.0);
+				var videoRatio=(16.0/9.0);
 				var videoWidth=Math.min( (0.8 * window.innerHeight)*videoRatio, 0.95*window.innerWidth);
 				var videoHeight=videoWidth / videoRatio;
 				$(".videoBox").colorbox({iframe:true, innerWidth:videoWidth|0, innerHeight:videoHeight|0});
@@ -87,15 +87,15 @@
 				resizeColorBox();
 
 				var win_w = window.innerWidth;
-			    if (document.getElementById("backgroundOverlay")!=undefined)
-			    {
-			    	var currentRes = ($("#backgroundOverlay").css('background-image').match("url.*_([0-9]+)") ? RegExp.$1 : null) | 0;
-			    	var bestRes=getBestBGImageSize(win_w);
-				    if (currentRes && currentRes < bestRes) {
+				if (document.getElementById("backgroundOverlay")!=undefined)
+				{
+					var currentRes = ($("#backgroundOverlay").css('background-image').match("url.*_([0-9]+)") ? RegExp.$1 : null) | 0;
+					var bestRes=getBestBGImageSize(win_w);
+					if (currentRes && currentRes < bestRes) {
 						changeCssValue('#backgroundOverlay', 'background-image', "url('../images/background_"+bestRes+".jpg')");
 						console.log('Chosen background: ' + bestRes);
-				    }
-			    }
+					}
+				}
 			}
 
 			function onResizeEvent() {
@@ -105,7 +105,7 @@
 					$( "#grainCanvas" ).fadeOut(50);
 				}
 				if (window['resizeTimeout'] != undefined) window.clearTimeout(resizeTimeout);
-    			resizeTimeout = window.setTimeout(onPageDidResized, 300);
+				resizeTimeout = window.setTimeout(onPageDidResized, 300);
 			}
 
 			function createNewCanvas()
@@ -131,29 +131,29 @@
 			}
  
 			function loadScript(url, useAsync, callback) {
-		        var script = document.createElement("script")
-		        script.type = "text/javascript";
+				var script = document.createElement("script")
+				script.type = "text/javascript";
 				script.async = useAsync;
-		        if (script.readyState) {
-		            script.onreadystatechange = function () {
-		                if (script.readyState == "loaded" || script.readyState == "complete") {
-		                    script.onreadystatechange = null;
-		                    callback();
-		                }
-		            };
-		        } else { 
-		            script.onload = function () {
-		                callback();
-		            };
-		        }
+				if (script.readyState) {
+					script.onreadystatechange = function () {
+						if (script.readyState == "loaded" || script.readyState == "complete") {
+							script.onreadystatechange = null;
+							callback();
+						}
+					};
+				} else { 
+					script.onload = function () {
+						callback();
+					};
+				}
 
-		        script.src = url;
-		        document.getElementsByTagName("head")[0].appendChild(script);
-		    }
+				script.src = url;
+				document.getElementsByTagName("head")[0].appendChild(script);
+			}
 
-		    function initPage()
-		    {
-		    	window.addEventListener("resize", onResizeEvent, false);
+			function initPage()
+			{
+				window.addEventListener("resize", onResizeEvent, false);
 
 				$(document).ready(function(){
 					$.extend($.colorbox.settings, {close: "&#x2716"});
@@ -180,7 +180,7 @@
 					window.grainAnimationEnabled=true;
 					window.setTimeout(onPageReady, 300);
 				});
-		    }
+			}
 
 			function getBestBGImageSize(windowWidth)
 			{
@@ -204,48 +204,48 @@
 					}
 			}
 
-		    function loadBackground()
-		    {
+			function loadBackground()
+			{
 				changeCssValue('#backgroundOverlay', 'background-image', "url('../images/background_"+getBestBGImageSize(window.innerWidth)+".jpg')");
 
-		    	function createDocumentFragment(htmlStr) {
-				    var frag = document.createDocumentFragment(),
-				        temp = document.createElement('div');
-				    temp.innerHTML = htmlStr;
-				    while (temp.firstChild) {
-				        frag.appendChild(temp.firstChild);
-				    }
-				    return frag;
+				function createDocumentFragment(htmlStr) {
+					var frag = document.createDocumentFragment(),
+						temp = document.createElement('div');
+					temp.innerHTML = htmlStr;
+					while (temp.firstChild) {
+						frag.appendChild(temp.firstChild);
+					}
+					return frag;
 				}
 				document.body.insertBefore(createDocumentFragment('<div id="backgroundOverlay"></div>'), document.body.childNodes[0]);
-		    }
+			}
 
-		    function onPageLoad()
-		    {
-		    	if (navigator.userAgent.indexOf('Android')!=-1)
-		    	{
-		    		document.getElementById("page_content").className = "page_content_android";
-		    	}
-		    	loadBackground();
-		    	var scriptSrc = ["http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", false,
-		    					 "js/jquery.localisation.min.js", false,
-		    					 "js/locale.js", false,
-		    					 "js/i1Noise.js", true,
-		    					 "js/jquery.colorbox-min.js", false];
-		    	
-		    	window.scriptsToLoad=scriptSrc.length / 2;
-		    	window.scriptsLoaded=0;
+			function onPageLoad()
+			{
+				if (navigator.userAgent.indexOf('Android')!=-1)
+				{
+					document.getElementById("page_content").className = "page_content_android";
+				}
+				loadBackground();
+				var scriptSrc = ["http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", false,
+								 "js/jquery.localisation.min.js", false,
+								 "js/locale.js", false,
+								 "js/i1Noise.js", true,
+								 "js/jquery.colorbox-min.js", false];
+				
+				window.scriptsToLoad=scriptSrc.length / 2;
+				window.scriptsLoaded=0;
 				for (i=0;i<window.scriptsToLoad;i++)
 				{
 					loadScript(scriptSrc[(i*2)+0], scriptSrc[(i*2)+1], function () {
-			        	++window.scriptsLoaded;
-			        	if (window.scriptsLoaded == window.scriptsToLoad)
-			        	{
-			        		initPage();
-			        	}
-			    	});
+						++window.scriptsLoaded;
+						if (window.scriptsLoaded == window.scriptsToLoad)
+						{
+							initPage();
+						}
+					});
 				}
-		    }
+			}
 
 			if (window.addEventListener)
 				 window.addEventListener("load", onPageLoad, false);
