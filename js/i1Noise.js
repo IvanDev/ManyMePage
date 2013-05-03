@@ -41,7 +41,7 @@ var i1Noise = (function() {
 	};
 
 	i1Noise.createCanvas = function(ratio, parentElement, canvasElementName, canvasClassName) {
-		var h = canvasDefWidth / ratio;
+		var h = (canvasDefWidth / ratio) | 0;
 		parentElement.append('<canvas id="'+canvasElementName+'" class="'+canvasClassName+'" width="'+canvasDefWidth+'" height="'+h+'"></canvas>');
 	};
 
