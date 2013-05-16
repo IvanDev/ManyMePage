@@ -61,7 +61,25 @@
 	
 		<footer id="footer">
 			<section class="centered_content">
-				<div class="copyright">&copy; 2012-13, Ivan, <a href="http://ManyMeApp.com">ManyMeApp.com</a>, <a href="privacy.html">Privacy Policy</a></div>
+
+					<script type="text/javascript">
+						//<![CDATA[
+						<!--
+						var x="function f(x){var i,o=\"\",ol=x.length,l=ol;while(x.charCodeAt(l/13)!" +
+						"=48){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o" +
+						".substr(0,ol);}f(\")54,\\\"500\\\\r\\\\700\\\\220\\\\030\\\\700\\\\Y030\\\\" +
+						"n\\\\AWRF__l020\\\\710\\\\pt\\\\v420\\\\MKRLP300\\\\000\\\\}Po_xQbtxU*bvqyp" +
+						"dc0cbo%ykik4jA330\\\\120\\\\300\\\\620\\\\720\\\\130\\\\H730\\\\230\\\\000\\"+
+						"\\300\\\\t\\\\310\\\\F>]89(0v5nrf\\\"\\\\&-2-07020\\\\HT][AQ_J\\\"(f};o nru" +
+						"ter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=%y;++y)54<i(fi{)++i;" +
+						"l<i;0=i(rof;htgnel.x=l,\\\"\\\"=o,i rav{)y,x(f noitcnuf\")"                  ;
+						while(x=eval(x));
+						//-->
+						//]]>
+					</script>
+ 					&bull; <a href="manyme_press_kit.zip">Download Press kit</a>
+					&bull; <a href="privacy.html">Privacy Policy</a></div>
+				<div class="copyright">&copy; 2012-13, i1labs. All rights reserved.
 
 			</section>
 		</footer>
@@ -218,7 +236,7 @@
 					}
 					return frag;
 				}
-				document.body.insertBefore(createDocumentFragment('<div id="backgroundOverlay"></div>'), document.body.childNodes[0]);
+				document.body.insertBefore(createDocumentFragment('<div id="bgParent"><div id="backgroundOverlay"></div></div>'), document.body.childNodes[0]);
 			}
 
 			function onPageLoad()

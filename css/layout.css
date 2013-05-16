@@ -10,7 +10,7 @@ body {
 }
 
 #backgroundOverlay {
-	overflow: auto;
+	overflow: hidden;
     width: 100%; 
     height: 100%;
     left: 0px;
@@ -28,6 +28,8 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 	z-index: -10;
+
+
 }
 
 section {
@@ -59,6 +61,17 @@ a:hover {
     margin: 0px;
     left: 0px;
     top: 0px;
+}
+
+#bgParent {
+	overflow: hidden;
+	padding: 0px;
+    margin: 0px;
+    left: 0px;
+    top: 0px;
+    position: absolute;;
+    width: 100%;
+    height: 100%;
 }
 
 #page_content {
@@ -177,7 +190,6 @@ a:hover {
 }
 
 #page_content .appstore {
-	display: block;
 	margin-top: 20px;
 	display: inline-block;
 }
@@ -239,6 +251,25 @@ a:hover {
 #footer .centered_content {
 	text-align: center;
 	padding: 0px 0 10px 0;
+	color: #f0f0f0;
+}
+
+#footer .centered_content a {
+	color: #ffffff;
+	font-family: Myriad Pro, Arial, Helvetica, sans-serif;
+	display: block;
+	font-size: 18px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+	display: inline-block;
+	-o-transition:.2s;
+	-ms-transition:.2s;
+	-moz-transition:.2s;
+	-webkit-transition:.2s;
+	transition:.2s;
+}
+
+#footer .centered_content a:hover {
+	color: #f0f0f0;
 }
 
 #footer .centered_content .copyright {
@@ -270,7 +301,11 @@ a:hover {
 }
 
 @media screen and (max-device-width: 480px) and (orientation: portrait) {
-	
+	#bgParent {
+		width: 320px;
+		height: 575px;
+		overflow: hidden;
+	}
 
 	#page_content .centered_content .left_content {
 		-webkit-text-size-adjust:none;
@@ -287,13 +322,13 @@ a:hover {
 	}
 
 	#page_content .appstore {
-		margin-top: -20px;
+		margin-top: -10px;
 	}
 
 	#footer {
 		-webkit-text-size-adjust:none;
 		position: absolute;
-		bottom: -120;
+		bottom: -210px;
 	}
 	/*
 	#page_content .social_box {
@@ -312,7 +347,11 @@ a:hover {
 }
 
 @media screen and (max-device-width: 480px) and (orientation: landscape) {
-
+	#bgParent {
+		width: 480px;
+		height: 360px;
+		overflow: hidden;
+	}
 
 	#page_content .centered_content .left_content {
 		text-align: center;
@@ -341,7 +380,7 @@ a:hover {
 	#footer {
 		-webkit-text-size-adjust:none;
 		position: absolute;
-		bottom: -140px;
+		bottom: -150px;
 	}
 
 	#backgroundOverlay {
@@ -349,12 +388,13 @@ a:hover {
 		height: 360px;
 	    position: absolute;
 	    bottom: -140;
+	    min-width: 429px;
 	    background-position: left center;
 	}
 
 	.videoBox {
-		margin-top: -65;
-		margin-left: 15;
+		margin-top: -65px;
+		margin-left: 15px;
 		width: 120px;
 		height: 67px;
 		background-size: 120px 67px;
